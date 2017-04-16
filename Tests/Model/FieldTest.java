@@ -2,8 +2,6 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * Created by Ajex
  * github: https://github.com/Ajexsen/
@@ -20,7 +18,7 @@ class FieldTest {
         int y = 45;
         int b = (int) 100 ;
         Field field = new Field(x,y,b);
-        String[][] testField = field.getBoard();
+        int[][] testField = field.getSurroundingBoom();
         System.out.print("   | ");
         for(int i = 0; i < x; i++){
             System.out.print(i%10 + " ");

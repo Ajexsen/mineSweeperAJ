@@ -1,6 +1,9 @@
 package View;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Created by Ajex
@@ -8,12 +11,36 @@ import javafx.scene.control.Button;
  */
 public class Cell extends Button {
 
-    public Cell(){
-        int de = 25;
-        this.setMinWidth(de);
-        this.setMinHeight(de);
-        this.setMaxWidth(de);
-        this.setMaxHeight(de);
+
+    private final int x;
+    private final int y;
+
+    private boolean isPressed = false;
+
+    public Cell(int x, int y){
+        this.x = x;
+        this.y = y;
+        int defaultSize = 25;
+        this.setMinWidth(defaultSize);
+        this.setMinHeight(defaultSize);
+        this.setMaxWidth(defaultSize);
+        this.setMaxHeight(defaultSize);
+
     }
+
+
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+
+    public void disable(){
+        isPressed = true;
+        this.setDisable(true);
+    }
+
+
 
 }

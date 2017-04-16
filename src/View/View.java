@@ -1,7 +1,6 @@
 package View;
 
-import Model.Field;
-import javafx.application.Application;
+import Controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -9,32 +8,25 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+
+import Model.Model;
 
 /**
  * Created by Ajex
  * github: https://github.com/Ajexsen/
  */
 
-public class View extends Application{
+public class View extends VBox{
 
-    public static void main(String args[]){
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-        primaryStage.setTitle("MineSweeper");
-        VBox vBox = new VBox();
+    private MenuBar menuBar;
 
 
-        MenuBar menuBar = new MenuBar();
+    public View(Controller controller) {
 
+        menuBar = new MenuBar();
         // --- Menu File
         Menu menuFile = new Menu("File");
         MenuItem exit = new MenuItem("Exit");
@@ -54,7 +46,7 @@ public class View extends Application{
                 dialog.resizableProperty().setValue(Boolean.FALSE);
                 dialog.setTitle("About");
                 dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.initOwner(primaryStage);
+                dialog.initOwner(menuBar.getScene().getWindow());
                 VBox dialogVbox = new VBox(20);
                 dialogVbox.getChildren().add(new Text("This is a Dialog"));
                 Scene dialogScene = new Scene(dialogVbox, 100, 100);
@@ -66,20 +58,15 @@ public class View extends Application{
 
 
         menuHelp.getItems().addAll(about);
-
         menuBar.getMenus().addAll(menuFile, menuHelp);
 
-        FieldBox fieldBox = new FieldBox(30,25);
-        Field field = new Field(30,25,70);
-        fieldBox.setField(field.getBoom());
+        StatusBar statusBar = new StatusBar();
+        FieldBox fieldBox = new FieldBox(controller);
 
-        vBox.getChildren().addAll(menuBar);
-        vBox.getChildren().addAll(fieldBox);
 
-        Scene scene = new Scene(vBox);
-        scene.setFill(Color.OLDLACE);
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        this.getChildren().addAll(menuBar);
+        this.getChildren().addAll(statusBar);
+        this.getChildren().addAll(fieldBox);
     }
 }
