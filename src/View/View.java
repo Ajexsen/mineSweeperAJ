@@ -1,5 +1,6 @@
 package View;
 
+import Model.Field;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,8 +30,8 @@ public class View extends Application{
     public void start(Stage primaryStage) throws Exception {
 
         primaryStage.setTitle("MineSweeper");
-        Scene scene = new Scene(new VBox(), 350, 350);
-        scene.setFill(Color.OLDLACE);
+        VBox vBox = new VBox();
+
 
         MenuBar menuBar = new MenuBar();
 
@@ -43,9 +44,6 @@ public class View extends Application{
             }
         });
         menuFile.getItems().addAll(exit);
-
-        // --- Menu Edit
-        Menu menuEdit = new Menu("Edit");
 
         // --- Menu View
         Menu menuHelp = new Menu("Help");
@@ -69,9 +67,17 @@ public class View extends Application{
 
         menuHelp.getItems().addAll(about);
 
-        menuBar.getMenus().addAll(menuFile, menuEdit, menuHelp);
+        menuBar.getMenus().addAll(menuFile, menuHelp);
 
-        ((VBox) scene.getRoot()).getChildren().addAll(menuBar);
+        FieldBox fieldBox = new FieldBox(30,25);
+        Field field = new Field(30,25,70);
+        fieldBox.setField(field.getBoom());
+
+        vBox.getChildren().addAll(menuBar);
+        vBox.getChildren().addAll(fieldBox);
+
+        Scene scene = new Scene(vBox);
+        scene.setFill(Color.OLDLACE);
 
         primaryStage.setScene(scene);
         primaryStage.show();
