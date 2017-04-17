@@ -1,9 +1,6 @@
 package View;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 
 /**
  * Created by Ajex

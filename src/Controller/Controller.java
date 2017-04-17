@@ -22,10 +22,27 @@ public class Controller {
     private int width;
     private int height;
 
+    private int nonBoomNr;
+    private int boomNr;
+    private int countUncovered;
+
+
+    private boolean[][] isFlagged;
+    private boolean[][] isUncovered;
+
+
+
     public Controller(Model model){
         this.model = model;
+
         width = model.getWidth();
         height = model.getHeight();
+
+        boomNr = model.getBoomNr();
+        nonBoomNr = (width * height) - boomNr;
+
+        isFlagged = new boolean[width][height];
+        isUncovered = new boolean[width][height];
     }
 
     public boolean isMine(int x, int y){
@@ -42,5 +59,42 @@ public class Controller {
     public int getHeight() {
         return height;
     }
+
+    public void Flag(int x, int y){
+        if(!isFlagged[x][y])
+            isFlagged[x][y] = true;
+        else
+            isFlagged[x][y] = false;
+    }
+    public boolean isFlagged(int x, int y){
+        return isFlagged[x][y];
+    }
+
+    public void uncover(int x, int y){
+        if(model.isMine(x,y)){
+            gameOver();
+        } else {
+            countUncovered++;
+            isUncovered[x][y] = true;
+        }
+    }
+
+    public boolean isGameCompleted(){
+        if(countUncovered == nonBoomNr){
+            System.out.println("finish!!!");
+            return true;
+            // end
+        }
+
+        // check winning condition
+        return false;
+    }
+
+    public void gameOver() {
+        System.out.println("GAME OVER!!!!");
+        // end game
+    }
+
+    public boolean isUncovered(int x, int y){ return isUncovered[x][y];}
 
 }

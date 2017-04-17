@@ -21,10 +21,15 @@ import Model.Model;
 
 public class View extends VBox{
 
+    private Controller controller;
+
     private MenuBar menuBar;
+    private StatusBar statusBar;
+    private FieldBox fieldBox;
 
 
     public View(Controller controller) {
+        this.controller = controller;
 
         menuBar = new MenuBar();
         // --- Menu File
@@ -60,7 +65,7 @@ public class View extends VBox{
         menuHelp.getItems().addAll(about);
         menuBar.getMenus().addAll(menuFile, menuHelp);
 
-        StatusBar statusBar = new StatusBar();
+        StatusBar statusBar = new StatusBar(controller);
         FieldBox fieldBox = new FieldBox(controller);
 
 

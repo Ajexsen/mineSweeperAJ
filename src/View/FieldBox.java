@@ -1,9 +1,7 @@
 package View;
 
 import Controller.Controller;
-import Model.Model;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -17,7 +15,10 @@ public class FieldBox extends GridPane {
     private int width;
     private int height;
 
+    private Controller controller;
+
     public FieldBox(Controller controller){
+        this.controller = controller;
         this.width = controller.getWidth();
         this.height = controller.getHeight();
         cells = new Cell[width][height];
@@ -30,18 +31,57 @@ public class FieldBox extends GridPane {
                     public void handle(MouseEvent event) {
                         MouseButton button = event.getButton();
                         Cell cell = (Cell) event.getSource();
+                        int x = cell.getX();
+                        int y = cell.getY();
                         if(button == MouseButton.PRIMARY){
-                            int nr = controller.surroundingNr(cell.getX(), cell.getY());
-                            cell.setText("" + nr);
-                            cell.disable();
+
+                            if(!controller.isMine(x,y)) {
+                                uncoverCell(x, y);
+                            } else {
+                                cell.disable();
+                                cell.setText("X");
+                                controller.gameOver();
+                            }
                         } else if(button == MouseButton.SECONDARY){
-                            cell.setText("F");
+                            if(!controller.isFlagged(x, y))
+                                cell.setText("F");
+                            else
+                                cell.setText("");
+
+                            controller.Flag(x,y);
+
                         } else if(button == MouseButton.MIDDLE){
                         }
                     }
                 });
 
                 this.add(cells[i][j],i,j,1,1);
+            }
+        }
+    }
+
+    private void uncoverCell(int x, int y){
+        if(x < width && y < height && x >= 0 && y >= 0 && !controller.isUncovered(x, y)){
+            cells[x][y].disable();
+            controller.uncover(x, y);
+            int nr = controller.surroundingNr(x, y);
+            controller.isGameCompleted();
+
+            if(nr == 0){
+                cells[x][y].setText("");
+
+                uncoverCell(x-1, y-1);
+                uncoverCell(x-1, y);
+                uncoverCell(x-1, y+1);
+
+                uncoverCell(x, y-1);
+                uncoverCell(x, y+1);
+
+                uncoverCell(x+1, y-1);
+                uncoverCell(x+1, y);
+                uncoverCell(x+1, y+1);
+            } else {
+                cells[x][y].setText("" + nr);
             }
         }
     }

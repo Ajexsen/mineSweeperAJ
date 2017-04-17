@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.HashSet;
-import java.util.Observable;
 import java.util.Random;
 import java.util.Set;
 
@@ -10,7 +9,7 @@ import java.util.Set;
  * github: https://github.com/Ajexsen/
  */
 
-public class Field extends Observable{
+public class Field{
 
     private final int[][] surroundingBoom; // 99 is isMine
     private final boolean[][] isMine;
@@ -32,7 +31,7 @@ public class Field extends Observable{
             int x = (cellNr-1) % width;
             int y = (cellNr-1) / width;
             //System.out.println("(" + x + ", " + y + ")");
-            surroundingBoom[x][y] = 99;
+            surroundingBoom[x][y] = 9;
             isMine[x][y] = true;
         }
 

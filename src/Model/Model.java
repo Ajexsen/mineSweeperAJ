@@ -7,14 +7,14 @@ package Model;
 
 public class Model {
 
-    private final int width;
-    private final int height;
+    private int width;
+    private int height;
 
-    private final int boom;
-    private final Field field;
+    private int boomNr;
+    private Field field;
 
-    private final int[][] surroundingBoom;
-    private final boolean[][] isMine;
+    private int[][] surroundingBoom;
+    private boolean[][] isMine;
 
 
     public Model(int w, int h, int b){
@@ -22,12 +22,12 @@ public class Model {
         height = h;
         int pix = width * height;
         if( b <=  pix ){
-            boom = b;
+            boomNr = b;
         } else {
-            boom = (int) Math.round(pix*0.4);
-            // default setting, boom rate 40%
+            boomNr = (int) Math.round(pix*0.4);
+            // default setting, boomNr rate 40%
         }
-        field = new Field(width, height, boom);
+        field = new Field(width, height, boomNr);
         surroundingBoom = field.getSurroundingBoom();
         isMine = field.getIsMine();
     }
@@ -41,6 +41,9 @@ public class Model {
     }
     public int getHeight() {
         return height;
+    }
+    public int getBoomNr() {
+        return boomNr;
     }
 
 }
