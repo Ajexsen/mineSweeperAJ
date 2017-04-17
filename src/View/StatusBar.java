@@ -10,17 +10,15 @@ import javafx.scene.layout.HBox;
  * Created by Ajex
  * github: https://github.com/Ajexsen/
  */
-public class StatusBar extends HBox {
+class StatusBar extends HBox {
     private Controller controller;
     private Button startButt;
 
-    public StatusBar(Controller controller){
+    StatusBar(Controller controller) {
         this.controller = controller;
 
         startButt = new Button("Start");
-        startButt.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-            }
+        startButt.setOnAction(e -> {
         });
         this.getChildren().add(startButt);
     }

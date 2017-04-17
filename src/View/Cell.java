@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
  * Created by Ajex
  * github: https://github.com/Ajexsen/
  */
-public class Cell extends Button {
+class Cell extends Button {
 
 
     private final int x;
@@ -14,7 +14,7 @@ public class Cell extends Button {
 
     private boolean isPressed = false;
 
-    public Cell(int x, int y){
+    Cell(int x, int y) {
         this.x = x;
         this.y = y;
         int defaultSize = 25;
@@ -26,18 +26,25 @@ public class Cell extends Button {
     }
 
 
-    public int getX() {
+    int getX() {
         return x;
     }
-    public int getY() {
+
+    int getY() {
         return y;
     }
 
-    public void disable(){
+    void disable() {
         isPressed = true;
+        this.setStyle(
+                "-fx-shadow-highlight-color : transparent;" +  // if you don't want a 3d effect highlight.
+                        "-fx-outer-border : transparent;" +  // if you don't want a button border.
+                        "-fx-inner-border : transparent;" +  // if you don't want a button border.
+                        "-fx-focus-color: transparent;" +  // if you don't want any focus ring.
+                        "-fx-faint-focus-color : transparent;"  // if you don't want any focus ring.
+        );
         this.setDisable(true);
     }
-
 
 
 }

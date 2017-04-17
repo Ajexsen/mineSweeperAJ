@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  */
 class FieldTest {
     @Test
-    void fieldT(){
+    void fieldT() {
 
     }
 
@@ -16,20 +16,20 @@ class FieldTest {
     void randomNrNoDups() {
         int x = 50;
         int y = 45;
-        int b = (int) 100 ;
-        Field field = new Field(x,y,b);
+        int b = 100;
+        Field field = new Field(x, y, b);
         int[][] testField = field.getSurroundingBoom();
         System.out.print("   | ");
-        for(int i = 0; i < x; i++){
-            System.out.print(i%10 + " ");
+        for (int i = 0; i < x; i++) {
+            System.out.print(i % 10 + " ");
         }
         System.out.println();
-        for(int i = 0; i < x; i++){
-            if(i/10 == 0) {
+        for (int i = 0; i < x; i++) {
+            if (i / 10 == 0) {
                 System.out.print("0");
             }
             System.out.print(i + " | ");
-            for(int j = 0 ; j < y ; j++){
+            for (int j = 0; j < y; j++) {
                 System.out.print(testField[i][j] + " ");
             }
             System.out.println();

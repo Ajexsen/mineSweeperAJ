@@ -16,14 +16,14 @@ public class main extends Application {
     private Controller controller;
     private View view;
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("MineSweeper");
-        model = new Model(30,25,70);
+        model = new Model(25, 25, 5);
         controller = new Controller(model);
         view = new View(controller);
 

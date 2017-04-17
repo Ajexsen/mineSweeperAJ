@@ -12,14 +12,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import Model.Model;
-
 /**
  * Created by Ajex
  * github: https://github.com/Ajexsen/
  */
 
-public class View extends VBox{
+public class View extends VBox {
 
     private Controller controller;
 
@@ -30,35 +28,30 @@ public class View extends VBox{
 
     public View(Controller controller) {
         this.controller = controller;
+        controller.subscribe(this);
 
         menuBar = new MenuBar();
         // --- Menu File
         Menu menuFile = new Menu("File");
         MenuItem exit = new MenuItem("Exit");
-        exit.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-                System.exit(0);
-            }
-        });
+        exit.setOnAction(t -> System.exit(0));
         menuFile.getItems().addAll(exit);
 
         // --- Menu View
         Menu menuHelp = new Menu("Help");
         MenuItem about = new MenuItem("About");
-        about.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-                final Stage dialog = new Stage();
-                dialog.resizableProperty().setValue(Boolean.FALSE);
-                dialog.setTitle("About");
-                dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.initOwner(menuBar.getScene().getWindow());
-                VBox dialogVbox = new VBox(20);
-                dialogVbox.getChildren().add(new Text("This is a Dialog"));
-                Scene dialogScene = new Scene(dialogVbox, 100, 100);
-                dialog.setScene(dialogScene);
-                dialog.show();
+        about.setOnAction(t -> {
+            final Stage dialog = new Stage();
+            dialog.resizableProperty().setValue(Boolean.FALSE);
+            dialog.setTitle("About");
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(menuBar.getScene().getWindow());
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.getChildren().add(new Text("This is a Dialog"));
+            Scene dialogScene = new Scene(dialogVbox, 100, 100);
+            dialog.setScene(dialogScene);
+            dialog.show();
 
-            }
         });
 
 
@@ -67,7 +60,6 @@ public class View extends VBox{
 
         StatusBar statusBar = new StatusBar(controller);
         FieldBox fieldBox = new FieldBox(controller);
-
 
 
         this.getChildren().addAll(menuBar);
