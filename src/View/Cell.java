@@ -22,7 +22,7 @@ class Cell extends Button {
         this.setMinHeight(defaultSize);
         this.setMaxWidth(defaultSize);
         this.setMaxHeight(defaultSize);
-
+        this.setStyle("-fx-font: 40px;");
     }
 
 
