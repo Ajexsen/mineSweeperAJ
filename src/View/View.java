@@ -1,8 +1,6 @@
 package View;
 
 import Controller.Controller;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -24,6 +22,8 @@ public class View extends VBox {
     private MenuBar menuBar;
     private StatusBar statusBar;
     private FieldBox fieldBox;
+
+
 
 
     public View(Controller controller) {
@@ -58,12 +58,23 @@ public class View extends VBox {
         menuHelp.getItems().addAll(about);
         menuBar.getMenus().addAll(menuFile, menuHelp);
 
-        StatusBar statusBar = new StatusBar(controller);
-        FieldBox fieldBox = new FieldBox(controller);
+        statusBar = new StatusBar(controller);
+        fieldBox = new FieldBox(controller);
 
 
         this.getChildren().addAll(menuBar);
         this.getChildren().addAll(statusBar);
+        this.getChildren().addAll(fieldBox);
+    }
+
+    public void setNr(int nr){
+        statusBar.setNr(nr);
+    }
+
+    public void restart(){
+        controller.restart();
+        this.getChildren().remove(fieldBox);
+        fieldBox = new FieldBox(controller);
         this.getChildren().addAll(fieldBox);
     }
 }

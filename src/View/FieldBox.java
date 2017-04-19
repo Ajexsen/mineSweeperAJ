@@ -32,7 +32,7 @@ class FieldBox extends GridPane {
                     int x = cell.getX();
                     int y = cell.getY();
                     if (button == MouseButton.PRIMARY) {
-
+                        System.out.println("yooo");
                         if (!controller.isMine(x, y)) {
                             uncoverCell(x, y);
                         } else {

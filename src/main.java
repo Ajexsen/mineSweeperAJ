@@ -23,7 +23,7 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("MineSweeper");
-        model = new Model(25, 25, 5);
+        model = new Model(15, 15, 15);
         controller = new Controller(model);
         view = new View(controller);
 

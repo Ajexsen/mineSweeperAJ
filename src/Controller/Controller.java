@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Model;
 import View.View;
+import javafx.animation.Timeline;
 
 /**
  * Created by Ajex
@@ -28,10 +29,11 @@ public class Controller {
     private int boomNr;
     private int countUncovered;
 
-
+    private int flagCount;
     private boolean[][] isFlagged;
     private boolean[][] isUncovered;
 
+    public Timeline timeline;
 
     public Controller(Model model) {
         this.model = model;
@@ -41,6 +43,7 @@ public class Controller {
 
         boomNr = model.getBoomNr();
         nonBoomNr = (width * height) - boomNr;
+        flagCount = 0;
 
         isFlagged = new boolean[width][height];
         isUncovered = new boolean[width][height];
@@ -63,7 +66,17 @@ public class Controller {
     }
 
     public void Flag(int x, int y) {
-        isFlagged[x][y] = !isFlagged[x][y];
+        if(!isFlagged[x][y]){
+            isFlagged[x][y] = true;
+            flagCount++;
+        } else {
+            isFlagged[x][y] = false;
+            flagCount--;
+        }
+
+        //view.setNr(flagCount);
+        System.out.println("" + flagCount);
+
     }
 
     public boolean isFlagged(int x, int y) {
@@ -71,6 +84,9 @@ public class Controller {
     }
 
     public void uncover(int x, int y) {
+        if(isFlagged(x, y)){
+            Flag(x, y);
+        }
         if (model.isMine(x, y)) {
             gameOver();
         } else {
@@ -99,8 +115,18 @@ public class Controller {
         return isUncovered[x][y];
     }
 
+    public int getBoomNr() {
+        return boomNr;
+    }
+
     public void subscribe(View view) {
         this.view = view;
+    }
+
+    public View getView(){ return view; }
+
+    public void restart(){
+        model = new Model(width, height, boomNr);
     }
 
 }
