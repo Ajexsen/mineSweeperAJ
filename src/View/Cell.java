@@ -1,6 +1,8 @@
 package View;
 
 import javafx.scene.control.Button;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * Created by Ajex
@@ -22,7 +24,7 @@ class Cell extends Button {
         this.setMinHeight(defaultSize);
         this.setMaxWidth(defaultSize);
         this.setMaxHeight(defaultSize);
-        this.setStyle("-fx-font: 40px;");
+        this.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
     }
 
 
@@ -44,6 +46,10 @@ class Cell extends Button {
                         "-fx-faint-focus-color : transparent;"  // if you don't want any focus ring.
         );
         this.setDisable(true);
+    }
+
+    public void greyOut(){
+        this.setStyle("fx-background-color: #999");
     }
 
 

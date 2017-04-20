@@ -3,15 +3,17 @@ package View;
 import Controller.Controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 /**
  * Created by Ajex
  * github: https://github.com/Ajexsen/
  */
-class StatusBar extends BorderPane {
+class StatusBar extends GridPane {
     private Controller controller;
     private Button startButt;
 
@@ -32,10 +34,11 @@ class StatusBar extends BorderPane {
         startButt = new Button("Start");
         boomCount = controller.getBoomNr();
         boomNr = new Counter("BOOM:");
+        boomNr.setCounter(boomCount);
         timerLabel = new Counter("TIME:");
 
         startButt.setOnAction(e -> {
-            controller.getView().restart();
+            controller.getView().restart(30,30,50);
             Timeline timeline = controller.timeline;
             if (isRunning) {
                 isRunning = false;
@@ -58,9 +61,14 @@ class StatusBar extends BorderPane {
                 timeline.playFromStart();
             }
         });
-        this.setLeft(startButt);
-        this.setCenter(boomNr);
-        this.setRight(timerLabel);
+
+        this.add(boomNr,0,0,1,1);
+        this.add(startButt,1,0,1,1);
+        this.add(timerLabel,2,0,1,1);
+
+        this.setHgap(10);
+        this.setVgap(10);
+        this.setPadding(new Insets(10, 5, 15, 5));
     }
 
     public void setNr(int nr) {

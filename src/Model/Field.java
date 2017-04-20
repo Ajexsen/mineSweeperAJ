@@ -74,7 +74,7 @@ class Field {
 
                 } else {
                     //continue;
-                    System.out.println();
+                    //System.out.println();
                 }
 
 

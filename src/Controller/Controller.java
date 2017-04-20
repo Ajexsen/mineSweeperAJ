@@ -75,7 +75,7 @@ public class Controller {
         }
 
         //view.setNr(flagCount);
-        System.out.println("" + flagCount);
+        //System.out.println("" + flagCount);
 
     }
 
@@ -126,6 +126,24 @@ public class Controller {
     public View getView(){ return view; }
 
     public void restart(){
+        isFlagged = new boolean[width][height];
+        isUncovered = new boolean[width][height];
+        model = new Model(width, height, boomNr);
+
+        //nonBoomNr = (width * height) - boomNr;
+        flagCount = 0;
+    }
+
+    public void restart(int width, int height, int boomNr){
+        this.width = width;
+        this.height = height;
+        this.boomNr = boomNr;
+
+        nonBoomNr = (width * height) - boomNr;
+        flagCount = 0;
+
+        isFlagged = new boolean[width][height];
+        isUncovered = new boolean[width][height];
         model = new Model(width, height, boomNr);
     }
 

@@ -32,25 +32,24 @@ class FieldBox extends GridPane {
                     int x = cell.getX();
                     int y = cell.getY();
                     if (button == MouseButton.PRIMARY) {
-                        System.out.println("yooo");
                         if (!controller.isMine(x, y)) {
                             uncoverCell(x, y);
                         } else {
                             cell.disable();
-                            cell.setText("X");
+                            cell.setText(Parameter.mineChar);
                             gameOver();
                             controller.gameOver();
                         }
                     } else if (button == MouseButton.SECONDARY) {
                         if (!controller.isFlagged(x, y))
-                            cell.setText("F");
+                            cell.setText(Parameter.flagChar);
                         else
                             cell.setText("");
 
                         controller.Flag(x, y);
 
                     } else if (button == MouseButton.MIDDLE) {
-                        System.out.println();
+                        //System.out.println();
                     }
                 });
 
@@ -79,6 +78,7 @@ class FieldBox extends GridPane {
                 uncoverCell(x + 1, y - 1);
                 uncoverCell(x + 1, y);
                 uncoverCell(x + 1, y + 1);
+
             } else {
                 cells[x][y].setText("" + nr);
             }
@@ -88,6 +88,10 @@ class FieldBox extends GridPane {
     private void gameOver() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
+                if(controller.isMine(i,j)){
+                    cells[i][j].setText(Parameter.mineChar);
+                    cells[i][j].greyOut();
+                }
                 cells[i][j].disable();
             }
         }
