@@ -38,45 +38,9 @@ public class View extends VBox {
         MenuItem setting = new MenuItem("Setting");
 
         setting.setOnAction(event -> {
-            final Stage settingPop = new Stage();
-            settingPop.resizableProperty().setValue(Boolean.FALSE);
-            settingPop.setTitle("Setting");
-            settingPop.initModality(Modality.APPLICATION_MODAL);
+            final SettingPop settingPop = new SettingPop(this);
             settingPop.initOwner(menuBar.getScene().getWindow());
-
-            GridPane settingPane = new GridPane();
-            TextField widthText = new TextField();
-            TextField heightText = new TextField();
-            TextField boomText = new TextField();
-            Button submit = new Button("Submit");
-            settingPane.add(new Label("Width:"),0,1,1,1);
-            settingPane.add(widthText, 1, 1,1,1);
-
-            settingPane.add(new Label("Height:"),0,2,1,1);
-            settingPane.add(heightText, 1, 2,1,1);
-
-            settingPane.add(new Label("Mines:"),0,3,1,1);
-            settingPane.add(boomText, 1, 3,1,1);
-
-            settingPane.add(submit, 1, 4,2,1);
-
-            settingPane.setHgap(10);
-            settingPane.setVgap(10);
-            settingPane.setPadding(new Insets(5, 10, 5, 10));
-
-            submit.setOnAction(event2 -> {
-                int width = Integer.valueOf(widthText.getText());
-                int height = Integer.valueOf(heightText.getText());
-                int boomNr = Integer.valueOf(boomText.getText());
-                restart(width, height, boomNr);
-                settingPop.close();
-            });
-
-            Scene settingScene = new Scene(settingPane);
-
-            settingPop.setScene(settingScene);
             settingPop.show();
-
         });
 
         MenuItem exit = new MenuItem("Exit");
